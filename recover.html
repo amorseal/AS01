@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amor Seal Recovery Tool</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Georgia", "Times New Roman", serif;
+        --ink: #1d180f;
+        --paper: #f4ecde;
+        --wax: #7e1527;
+        --line: rgba(29, 24, 15, 0.15);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #efe5d5 0%, #f8f2e6 100%);
+        color: var(--ink);
+      }
+
+      main {
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 48px 20px 72px;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 40px rgba(60, 36, 12, 0.12);
+        padding: 28px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: 0.02em;
+      }
+
+      p, li, label, textarea, input, button, pre {
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      label {
+        display: block;
+        margin: 22px 0 8px;
+        font-weight: 700;
+      }
+
+      textarea,
+      input,
+      select {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--ink);
+        padding: 12px 14px;
+      }
+
+      textarea {
+        min-height: 180px;
+        resize: vertical;
+      }
+
+      button {
+        margin-top: 22px;
+        padding: 12px 18px;
+        border: 0;
+        background: var(--wax);
+        color: white;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+
+      .note,
+      .status {
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.65);
+      }
+
+      .error {
+        color: #8d0e0e;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel">
+        <h1>Amor Seal Recovery Tool</h1>
+        <p>This tool runs locally in your browser.</p>
+        <p>Paste either an AS01 base64url payload or raw Bitcoin witness JSON, enter the opening phrase, and recover the letter without using amorseal.com.</p>
+
+        <label for="mode">Recovery mode</label>
+        <select id="mode">
+          <option value="payload">AS01 payload</option>
+          <option value="raw-json">Raw transaction JSON / witness JSON</option>
+          <option value="txid">Bitcoin txid</option>
+        </select>
+
+        <label id="payload-label" for="payload">AS01 payload</label>
+        <textarea id="payload" spellcheck="false" autocomplete="off"></textarea>
+
+        <label for="phrase">Opening phrase</label>
+        <input id="phrase" type="password" autocomplete="off" spellcheck="false" />
+
+        <button id="open-button" type="button">Open letter</button>
+
+        <div class="note">
+          <strong>Local-only mode.</strong>
+          <span>Payload and raw JSON modes do not require network requests. Txid mode uses public read-only Bitcoin APIs and falls back to raw transaction JSON if browser fetch is unavailable.</span>
+        </div>
+
+        <div id="status" class="status" hidden></div>
+        <div id="error" class="status error" hidden></div>
+        <div id="output" class="status" hidden>
+          <strong>Recovered message</strong>
+          <pre id="output-text"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="./brotli-decoder.bundle.js"></script>
+    <script src="./as01-recover.js"></script>
+  </body>
+</html>

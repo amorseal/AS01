@@ -1,0 +1,13 @@
+{
+  "name": "amorseal-recover",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Standalone AS01 recovery tool for Amor Seal letters.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "recover": "node cli/recover.mjs",
+    "verify:roundtrip": "node scripts/verify-roundtrip.mjs",
+    "verify:secret-scan": "node scripts/verify-secret-scan.mjs"
+  }
+}
