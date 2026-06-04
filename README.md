@@ -45,6 +45,20 @@ The full byte-level format, cipher parameters, and key derivation are documented
 
 You need two things: your six-word opening phrase, and your Bitcoin transaction (the transaction id, or its raw data).
 
+### A note on six words vs. twelve
+
+If you sealed your letter through the Amor Seal app, you may have been given **twelve words**, not six. Here is the relationship:
+
+- The **first six words** are a *letter code* — a public identifier Amor Seal uses to find the right letter. They are an address, not a key. They are not part of the encryption and are not needed here.
+- The **last six words** are the **opening phrase** — the actual decryption key. These are the six words this tool needs.
+
+So depending on how your letter was shared:
+
+- If you have **twelve words**, use the **last six** as your opening phrase.
+- If you have **six words** (the privacy-first "advanced" method, where the phrase was sent on its own), those six *are* the opening phrase — use them directly.
+
+Either way, this tool only ever needs the **six-word opening phrase**. It never needs the letter code, because finding the letter is not the same as opening it — and opening it is the only thing that happens here, on your device.
+
 ### In your browser, the simplest way
 
 1. Download this repository, or just the file `recover.html`.
